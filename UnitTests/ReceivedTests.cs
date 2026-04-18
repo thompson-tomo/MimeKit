@@ -80,6 +80,17 @@ namespace UnitTests {
 			// TODO: test setting For to an invalid mailbox value
 
 			Assert.Throws<ArgumentNullException> (() => received.ToString (null));
+
+			Assert.Throws<ArgumentNullException> (() => new ReceivedClause (null, "value"));
+			Assert.Throws<ArgumentNullException> (() => new ReceivedClause ("keyword", null));
+			Assert.Throws<ArgumentNullException> (() => new ReceivedClause ("keyword", "value", null));
+
+			Assert.Throws<ArgumentException> (() => new ReceivedClause (string.Empty, "value"));
+			Assert.Throws<ArgumentException> (() => new ReceivedClause ("keyword with spaces", "value"));
+			Assert.Throws<ArgumentException> (() => new ReceivedClause ("-keyword-starting-with-dash", "value"));
+			Assert.Throws<ArgumentException> (() => new ReceivedClause ("key!word", "value"));
+
+			Assert.Throws<ArgumentException> (() => new ReceivedClause ("keyword", string.Empty));
 		}
 
 		class ReceivedResults
